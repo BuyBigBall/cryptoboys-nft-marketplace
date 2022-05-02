@@ -66,3 +66,20 @@ npm start
 ```
 - Open metamask browser wallet and connect network to Localhost 7545.
 - Import accounts from ganache-cli into the metamask browser wallet to make transactions on the DApp.
+
+
+
+## Truffle Project to HardHat project
+Do not install Hardhat globally. If you already have installed hardhat globally, please uninstall as the issue might be because of that as mentioned in the error message.
+
+Things you need to do to mitigate this:
+
+1. Check if the project package.json has hardhat as its dev dependency. If it is not, 
+```
+    run npm install --save-dev hardhat 
+    or 
+    yarn add --dev hardhat
+```
+2. Uninstall any global version of hardhat
+3. Remove node_modules and run npm install or yarn install to install all dependencies.
+4. Try running npx hardhat compile or npx hardhat node to check if it works.

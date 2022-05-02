@@ -3,6 +3,7 @@ import { HashRouter, Route } from "react-router-dom";
 import "./App.css";
 import Web3 from "web3";
 import CryptoBoys from "../abis/CryptoBoys.json";
+import addresses  from "../abis/contract-address.json";
 
 import FormAndPreview from "../components/FormAndPreview/FormAndPreview";
 import AllCryptoBoys from "./AllCryptoBoys/AllCryptoBoys";
@@ -97,6 +98,7 @@ class App extends Component {
   loadBlockchainData = async () => {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
+    console.log(accounts);
     if (accounts.length === 0) {
       this.setState({ metamaskConnected: false });
     } else {
@@ -108,13 +110,22 @@ class App extends Component {
       this.setState({ accountBalance });
       this.setState({ loading: false });
       const networkId = await web3.eth.net.getId();
-      const networkData = CryptoBoys.networks[networkId];
-      if (networkData) {
+      // const networkData = CryptoBoys.networks[networkId];
+      // if (networkData) {
+      //   this.setState({ loading: true });
+      //   const cryptoBoysContract = web3.eth.Contract(
+      //     CryptoBoys.abi,
+      //     networkData.address
+      //   );
+      
+      if (CryptoBoys) {
         this.setState({ loading: true });
         const cryptoBoysContract = web3.eth.Contract(
           CryptoBoys.abi,
-          networkData.address
+          addresses.CryptoBoysToken
         );
+      //<---------------------
+
         this.setState({ cryptoBoysContract });
         this.setState({ contractDetected: true });
         const cryptoBoysCount = await cryptoBoysContract.methods

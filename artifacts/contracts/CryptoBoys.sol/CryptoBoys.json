@@ -2,7 +2,6 @@
   "_format": "hh-sol-artifact-1",
   "contractName": "CryptoBoys",
   "sourceName": "contracts/CryptoBoys.sol",
-  "networks": {  },
   "abi": [
     {
       "inputs": [],
